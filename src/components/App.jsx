@@ -10,12 +10,23 @@ function App() {
   function addNewNote(newNote){
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
+  function handleDelete(id) {
+    // Filter method to remove the note with the given id
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  }
+
   return (
     <div>
       <Header />
       <CreateArea onAdd={addNewNote} />
         {notes.map((notes, index) => (
-      <Note key={index} title={notes.title} content={notes.content} />
+      <Note
+      key={index}
+      id={notes.id}
+      title={notes.title}
+      content={notes.content}
+      onDelete={handleDelete}
+       />
       ))}
       <Footer />
     </div>
@@ -23,3 +34,4 @@ function App() {
 }
 
 export default App;
+
