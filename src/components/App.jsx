@@ -7,25 +7,26 @@ import CreateArea from "./CreateArea";
 
 function App() {
   const [notes, setNotes] = useState([]);
+
   function addNewNote(newNote){
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
   function handleDelete(id) {
     // Filter method to remove the note with the given id
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+    setNotes((prevNotes) => prevNotes.filter((note, index) => index !== id));
   }
 
   return (
     <div>
       <Header />
       <CreateArea onAdd={addNewNote} />
-        {notes.map((notes, index) => (
+        {notes.map((note, index) => (
       <Note
-      key={index}
-      id={notes.id}
-      title={notes.title}
-      content={notes.content}
-      onDelete={handleDelete}
+        key={index}
+        id={index}
+        title={note.title}
+        content={note.content}
+        onDelete={handleDelete}
        />
       ))}
       <Footer />
@@ -34,4 +35,3 @@ function App() {
 }
 
 export default App;
-
